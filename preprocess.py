@@ -1,8 +1,7 @@
 import json
 import os
 
-final_labels = {"info": {"description": "my-project-name"}, "images": [],
-                "annotations": [], "categories": [{"id": 1, "name": "răng sâu"}]}
+final_labels = None
 
 
 def addLabel(label):
@@ -24,7 +23,10 @@ def addLabel(label):
 for json_name in os.listdir("./label"):
     with open("./label/"+json_name, 'r') as f:
         label = json.load(f)
-        addLabel(label)
+        if final_labels is None:
+            final_labels = label
+        else:
+            addLabel(label)
 
 image_in_annotation = list(map(lambda x: x["image_id"], label['annotations']))
 

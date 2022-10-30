@@ -1,4 +1,10 @@
 from mrcnn.config import Config
+import json
+
+with open("./label.json") as f:
+    label = json.load(f)
+
+num_class = len(label['categories'])
 
 
 class TrainConfig(Config):
@@ -11,7 +17,7 @@ class TrainConfig(Config):
     GPU_COUNT = 1
     IMAGES_PER_GPU = 1
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 1  # Background + 1 other class
+    NUM_CLASSES = num_class + 1  # Background + 1 other class
 
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 100
@@ -28,5 +34,5 @@ class PredictConfig(Config):
     GPU_COUNT = 1
     IMAGES_PER_GPU = 1
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 1  # Background + 1 other class
+    NUM_CLASSES = num_class + 1  # Background + 1 other class
     DETECTION_MIN_CONFIDENCE = 0.8
