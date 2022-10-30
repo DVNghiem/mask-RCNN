@@ -3,11 +3,11 @@ import datetime
 from mrcnn import utils
 import tensorflow as tf
 import mrcnn.model as modellib
-from config import CustomConfig
+from config import TrainConfig
 from dataset import CustomDataset
 
 
-config = CustomConfig()
+config = TrainConfig()
 
 
 def load_image_dataset(annotation_path, dataset_path, dataset_type):
